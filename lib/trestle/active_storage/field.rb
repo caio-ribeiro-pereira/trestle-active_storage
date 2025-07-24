@@ -5,16 +5,16 @@ module Trestle
         instance = builder.object
         attachment = instance.send(name)
 
-        puts "INSTANCE: #{instance.inspect}"
-        puts "BUILDER: #{builder.inspect}"
+        puts "INSTANCE: #{instance.inspect}\n"
+        puts "BUILDER: #{builder.inspect}\n"
 
         rendering_options = {}.tap do |hash|
           hash[:locals] = {}.tap do |locals|
             locals[:builder] = builder
             locals[:field_name] = name
 
-            puts "hash: #{hash.inspect}"
-            puts "locals: #{locals.inspect}"
+            puts "hash: #{hash.inspect}\n"
+            puts "locals: #{locals.inspect}\n"
             puts "==========\n\n\n"
 
             if attachment.respond_to?(:each)
