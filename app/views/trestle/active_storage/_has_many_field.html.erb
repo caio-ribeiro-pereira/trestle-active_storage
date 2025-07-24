@@ -5,21 +5,21 @@
         <% attachments.each do |attachment| %>
           <div class="active-storage__preview">
             <% if attachment.previewable? %>
-              <%= link_to image_tag(main_app.url_for(attachment.preview(resize_to_limit: [300, 300])), class: "active-storage__image"),
+              <%= link_to image_tag(main_app.url_for(attachment.preview(resize_to_limit: [300, 300])), class: "active-storage__image", width: 300, height: 300),
                           main_app.rails_blob_path(attachment, disposition: "attachment") %>
             <% elsif attachment.variable? %>
-              <%= link_to image_tag(main_app.url_for(attachment.variant(resize_to_limit: [300, 300])), class: "active-storage__image"),
+              <%= link_to image_tag(main_app.url_for(attachment.variant(resize_to_limit: [300, 300])), class: "active-storage__image", width: 300, height: 300),
                           main_app.rails_blob_path(attachment, disposition: "attachment") %>
             <% else %>
               <%= link_to main_app.rails_blob_path(attachment, disposition: "attachment"), class: "btn btn-info" do %>
                 <i class="fa fa-download"></i>
-                <span class="btn-label">Download <%= field_name %></span>
+                <span class="btn-label"><%= t('trestle.attachments.download') %></span>
               <% end %>
             <% end %>
             <% if attachment.persisted? %>
               <div>
                 <small><%= attachment.blob.filename %></small>
-                <%= builder.check_box("delete_#{field_name}_#{attachment.blob_id.to_s.gsub('-', '')}", label: "Delete this #{field_name.to_s.singularize}") %>
+                <%= builder.check_box("delete_#{field_name}_#{attachment.blob_id.to_s.gsub('-', '')}", label: t('trestle.attachments.delete')) %>
               </div>
             <% else %>
               <small><%= attachment.blob.filename %></small>

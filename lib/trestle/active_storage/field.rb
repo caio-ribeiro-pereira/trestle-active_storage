@@ -5,10 +5,17 @@ module Trestle
         instance = builder.object
         attachment = instance.send(name)
 
+        puts "INSTANCE: #{instance.inspect}"
+        puts "BUILDER: #{builder.inspect}"
+
         rendering_options = {}.tap do |hash|
           hash[:locals] = {}.tap do |locals|
             locals[:builder] = builder
             locals[:field_name] = name
+
+            puts "hash: #{hash.inspect}"
+            puts "locals: #{locals.inspect}"
+            puts "==========\n\n\n"
 
             if attachment.respond_to?(:each)
               hash[:partial] = 'trestle/active_storage/has_many_field'
